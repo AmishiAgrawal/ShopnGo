@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShopnGo - Your one place destination for evrything you need</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .dropdown-toggle::after,  .navbar-toggler-icon{
+            border-top-color: white;
+        }
+        .dropdown-menu[data-bs-popper] {
+            top: 100%;
+            left: -75px;
+            margin-top: var(--bs-dropdown-spacer);
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: white;
+        }  
+        .link-dark {
+            color: #c9c1d9!important;
+        }
+        .link-dark:active,.link-dark:visited {
+            color: aliceblue!important;
+        }
+        .link-dark:hover {
+            color: aliceblue!important;
+        }
+        #mycategories{
+            background-color: #212529;
+        }
+        #mycategories a{
+            color:#c9c1d9;
+        }
+        #mycategories a:hover{
+            color:white;
+            background-color:#444f60;
+        }
+        .dropdown-item.active{
+            color:yellow;
+            background-color:#444f60;
+        }
+        .logo{
+            border-radius: 80%;
+        }
+
+    </style>
+  </head>
+  <body>
+    {% load static %}
+              
+        <header class="p-3 mb-3 border-bottom bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img class="bi me-2 logo" width="40" height="40" role="img" src="{% static 'MyShop/logo2.jpg' %}" >
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+                <li>
+                    <div class="dropdown link-dark" data-bs-theme="light">
+                        <a  href="#" class="nav-link px-2 link-dark dropdown-toggle" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
+                            Default dropdown
+                        </a>
+                        <ul class="dropdown-menu" id='mycategories' aria-labelledby="dropdownMenuButtonDark">
+                            <li><a class="dropdown-item active" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </li>
+                            
+                
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+                </div>
+            </div>
+            </div>
+        </header>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
+
