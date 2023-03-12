@@ -43,61 +43,165 @@
         .logo{
             border-radius: 80%;
         }
-
+        .myicon{
+            margin-bottom: 8px;
+        }
+        footer{
+            color: white;
+        }
+        footer a{
+            color:rgb(214, 214, 214);
+        }
+        footer a:hover{
+            color: rgb(62, 139, 255)!important;;
+        }
+        footer a:active, footer a:visited{
+            color:grey;
+        }
     </style>
   </head>
   <body>
     {% load static %}
               
-        <header class="p-3 mb-3 border-bottom bg-dark" data-bs-theme="dark">
+        <header class="p-2 mb-3 border-bottom bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                <img class="bi me-2 logo" width="40" height="40" role="img" src="{% static 'MyShop/logo2.jpg' %}" >
-                </a>
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img class="bi me-2 logo" width="40" height="40" role="img" src="{% static 'MyShop/logo2.jpg' %}" >
+                    </a>
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
-                <li>
-                    <div class="dropdown link-dark" data-bs-theme="light">
-                        <a  href="#" class="nav-link px-2 link-dark dropdown-toggle" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
-                            Default dropdown
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-dark">Home</a></li>
+                    
+                    <li>
+                        <div class="dropdown link-dark" data-bs-theme="light">
+                            <a  href="#" class="nav-link px-2 link-dark dropdown-toggle" id="dropdownMenuButtonDark" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu" id='mycategories' aria-labelledby="dropdownMenuButtonDark">
+                                <li><a class="dropdown-item active" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                                
+                    <li><a href="#" class="nav-link px-2 link-dark">Contact</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+                    </ul>
+
+                    <div class='mx-1 myicon'>
+                        <a href="#" class="d-block link-dark text-decoration-none"  aria-expanded="false">
+                            <img src="{% static 'MyShop/icons8-favorite-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle">
                         </a>
-                        <ul class="dropdown-menu" id='mycategories' aria-labelledby="dropdownMenuButtonDark">
-                            <li><a class="dropdown-item active" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </div>
+                    <div class='mx-4 myicon'>
+                        <a href="#" class="d-block link-dark text-decoration-none"  aria-expanded="false">
+                            <img src="{% static 'MyShop/icons8-shopping-cart-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle">
+                        </a>
+                    </div>
+
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                    </form>
+
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
                         </ul>
                     </div>
-                </li>
-                            
-                
-                </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-                </form>
-
-                <div class="dropdown text-end">
-                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
+             
+                                    
                 </div>
             </div>
-            </div>
         </header>    
+
+        {% block body %}{% endblock %}
+
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum sapiente laborum perspiciatis expedita dolorem facilis sint esse molestiae sequi sit. Est deleniti, suscipit mollitia dolor ad consectetur minus neque fuga perferendis voluptatum sed, at libero maxime voluptate dolorum esse architecto. Quis eveniet expedita nisi quod reprehenderit maiores in asperiores voluptas. Consequuntur culpa ratione non? Earum perspiciatis assumenda sed sint nulla harum enim quidem alias dolores illum at dolore doloribus, repellat facilis expedita veniam excepturi minus quam! Sit ducimus ad nobis magni praesentium voluptatum dignissimos, exercitationem commodi. Blanditiis magni natus autem doloribus illo perspiciatis ipsum unde in reiciendis quis rerum nostrum consequuntur sint saepe dolore inventore iure, amet, eveniet deserunt cum voluptates est fuga nihil excepturi. Sit suscipit facere, provident rem odio fuga, aut, non vitae beatae et maxime unde eum laboriosam facilis dignissimos. Quos rem sequi dicta, reiciendis eaque quidem quo vero aspernatur porro, voluptatibus est necessitatibus corrupti reprehenderit dolores. Laborum facilis optio esse explicabo, sapiente ex. Error molestiae facilis dolore non odio! Fugit, beatae modi quis quo quisquam culpa aliquam animi. Obcaecati minima error debitis fugiat odit suscipit mollitia quas architecto doloremque sapiente culpa consectetur harum qui, libero eligendi ipsum, rerum beatae maxime ratione provident. Eligendi est laudantium optio?
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eius dolorem exercitationem et fugit doloremque quos blanditiis, officiis quaerat consequuntur cumque voluptate in voluptatum maiores hic enim! Rem quisquam beatae harum enim officiis quo nemo maxime iusto modi assumenda veritatis blanditiis minus et, ratione excepturi eum repellendus nisi itaque delectus doloribus, explicabo eaque! Ducimus labore, nisi ex dicta harum nulla alias fugiat facilis illum vel nesciunt odio vitae quasi officiis optio perspiciatis tempore dolorum beatae? Quo aspernatur et tempore aliquam optio aperiam dolore similique magnam ducimus magni, fugiat a explicabo hic eos dolorum itaque. Corrupti adipisci aliquid porro cumque rem qui eos magnam repellat vitae omnis facilis nemo quaerat dolores neque placeat dolor nihil error assumenda quas velit quasi sapiente deleniti, necessitatibus illo? Dicta ducimus alias rem quae consequatur temporibus minima. Culpa porro reprehenderit ut laborum ipsum adipisci, illum dicta dolores quis sequi et laboriosam iste voluptas rerum! Nisi laudantium totam dolore accusantium. Laudantium, itaque! Eaque omnis ad exercitationem fugit mollitia quisquam dicta accusantium adipisci assumenda voluptatem delectus consequatur cum quibusdam qui itaque inventore repellat consectetur minima nulla, sit ducimus esse in ab! Dolorem vel aliquid quo vero illum eligendi culpa eius blanditiis quas unde, totam repudiandae alias deserunt, qui nostrum soluta suscipit velit. Ut libero aliquam excepturi, quasi rerum sequi voluptates aperiam quo dolor minima incidunt, fugit laboriosam vitae amet at maiores vel nesciunt iusto quas sint praesentium. Dolorem explicabo officiis laudantium provident! Explicabo eveniet deleniti corrupti nulla quasi eius qui perferendis optio veniam, officiis itaque, sunt consectetur ratione veritatis odio! Corporis, deleniti adipisci sunt totam veniam vitae iusto voluptatibus blanditiis eum asperiores cumque error nisi accusantium similique non ipsum, distinctio fugit eius ullam voluptas reprehenderit eaque. Dolorem, eos! Temporibus officiis expedita molestias consequatur, cum earum ex dolorem animi adipisci rerum nobis hic alias iste id, exercitationem minus dolores!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur animi officia quisquam molestiae consequuntur quas quam quo, expedita non magnam voluptate laudantium rerum nam? Quas optio obcaecati deserunt eius fuga perferendis tenetur, fugiat, omnis velit soluta in aut aperiam placeat harum voluptates quo perspiciatis illo ipsam est earum nesciunt mollitia nam id! Quam ad repellendus, consequatur at rem culpa vero sapiente fuga sunt error aspernatur cum sit incidunt maiores ut nam repudiandae illo suscipit voluptatum a nisi inventore. Sequi explicabo deleniti itaque nihil similique quia natus fugit. Officia consequatur vitae quod, magni molestiae obcaecati, corrupti unde assumenda placeat velit asperiores dignissimos sit quis sapiente officiis et eligendi aspernatur accusantium voluptas suscipit est aperiam. Aspernatur in quas atque delectus maxime quaerat asperiores quos explicabo numquam hic. Nam rem dignissimos magni fugit at suscipit fugiat itaque voluptatum est vitae corporis voluptates tempore, quasi explicabo accusamus. Eveniet porro similique enim delectus voluptate eum nam saepe consequuntur deserunt numquam, recusandae aliquid reprehenderit necessitatibus repellat voluptatem temporibus maxime id voluptatum doloribus? Alias, neque temporibus, debitis iste commodi maiores aut autem explicabo porro placeat nostrum sint pariatur voluptas, reprehenderit quibusdam deserunt excepturi consequuntur consectetur? Velit, ducimus suscipit architecto possimus sunt pariatur illo quam repellendus quisquam temporibus?
+        </p>
+
+        <footer class="py-5 bg-dark" data-bs-theme="dark">
+            <div class="row container-fluid px-5">
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">About</a></li>
+                    </ul>
+                </div>
+        
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">About</a></li>
+                    </ul>
+                </div>
+        
+                <div class="col-6 col-md-2 mb-3">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0">About</a></li>
+                    </ul>
+                </div>
+        
+                <div class="col-md-5 offset-md-1 mb-3">
+                    <form>
+                        <h5>Subscribe to our newsletter</h5>
+                        <p>Monthly digest of what's new and exciting from us.</p>
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+            <div class="d-flex flex-column flex-sm-row justify-content-between p-2 my-2 border-top">
+                <p>© 2022 Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#twitter"></use>
+                            </svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#instagram"></use>
+                            </svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#facebook"></use>
+                            </svg></a></li>
+                </ul>
+            </div>
+        </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
