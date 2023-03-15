@@ -17,3 +17,15 @@ def cart(request):
 
 def categories(request):
     return render(request,'MyShop/categories.html')
+
+def checkout(request):
+    return render(request,'MyShop/checkout.html')
+
+def productview(request):
+    return render(request,'MyShop/productview.html')
+
+def tracker(request):
+    return render(request,'MyShop/tracker.html')
+
+def search(request):
+    return render(request,'MyShop/search.html')

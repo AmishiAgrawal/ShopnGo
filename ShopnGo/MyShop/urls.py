@@ -8,6 +8,8 @@ urlpatterns = [
     path('cart',views.cart),
     path('wishlist',views.wishlist),
     path('categories',views.categories),
-    # path('',views.index),
-    # path('',views.index),
+    path('tracker',views.tracker),
+    path('checkout',views.checkout),
+    path('productview',views.productview),
+    path('search',views.search),
 ]
