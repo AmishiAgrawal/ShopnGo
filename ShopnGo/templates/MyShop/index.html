@@ -1,16 +1,12 @@
 {% extends 'MyShop/main.html' %} 
 {% block a1 %}active{% endblock %}
 {% block style %}
-    .card{
-        height: 400px;
-    }
-    .card img{
-        height: auto;
-        width: 60%;
-        margin: auto;
-        
-    }
     
+
+    .card-img-top{
+        object-fit: contain;
+
+    }
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
         background-color: black;
@@ -19,261 +15,93 @@
         {% comment %} box-shadow: 0px 0px 5px black; {% endcomment %}
 
     }
+ 
+    .prod-img{
+        margin: auto;
+        padding: 20px; 
+    }
+    .card2{
+        background:#f3f7fd;
+        border:none;
+
+    }
+    .card {
+  border-radius: 0;
+}
+.carousel{
+    width:100%;
+    margin: auto;
+}
+.container{
+    width: 80%;
+}
+.card-group{
+    background:#f3f7fd;
+}
+.img-fluid{
+    min-width: 50px;
+    margin: auto;
+}
+{% comment %} .carousel-control-next, .carousel-control-prev{
+    width: 3%;
+} {% endcomment %}
 
 {% endblock %}
 {% block body %}
 {% load static %}
 
-    <div id="carouselExampleAutoplaying" class="carousel slide car_carousel" data-bs-ride="carousel">
-        <div class="container my-5 mb-5">  
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card-group">
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card-group">
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="carousel-item">
-                <div class="card-group">
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% for product,range,number_of_slides,range2,p_category in allProducts %}
+{% for c in p_category %}
+<div class='row'>
+<div id="carouselExampleAutoplaying{{c}}" class="carousel col slide car_carousel" data-bs-ride="carousel">
+    <div class="container my-5 mb-5">
         
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <div id="carouselExampleAutoplaying" class="carousel slide car_carousel" data-bs-ride="carousel">
-        <div class="container my-5 mb-5">  
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card-group">
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card-group">
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h1 class='my-4'>{{c}}</h1>
+        
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <div class="card-group d-flex flex-wrap">
+                            {% for p in product %}
+                            <div class="card col-3 col-sm-3">
+                                <div class='prod-img'>
+                                    <img src='media/{{p.product_img}}' class="card-img-top img-fluid" alt="...">
+                                </div>
+                                <div class="card-body">
+                                <h5 class="card-title">{{p.product_name}}</h5>
+                                <p class="card-text">{{p.product_sdesc}}</p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <button type="button" class="btn btn-primary">View Details</button>
+                                <button type="button" id='pr{{p.product_id}}' class="btn btn-primary cart">Add to Cart</button>
+                                
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                                </div></div><div class="carousel-item" data-bs-interval="10000"><div class="card-group d-flex flex-wrap">
+                            {% endif %}
+                            {% if forloop.last %}
+                                {% for x in range2 %}
+                                    <div class='card card2'></div>
+                                {% endfor %}
+                            {% endif %}
+                            {% endfor %}
+                                </div></div>                            
                             </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="carousel-item">
-                <div class="card-group">
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src='{% static  "MyShop/asian1.jpg" %}' class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+                        </div> 
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{c}}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{c}}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+</div>
+</div>
+{% endfor %}
+{% endfor %}
+{% endblock %}
+
+{% block js %}
+
 
 {% endblock %}

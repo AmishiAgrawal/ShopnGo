@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ShopnGo - Your one place destination for evrything you need</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <style>
         .dropdown-toggle::after,  .navbar-toggler-icon{
@@ -42,9 +43,13 @@
         }
         .logo{
             border-radius: 80%;
+            margin: auto;            
         }
         .myicon{
             margin-bottom: 8px;
+        }
+        .myicon a,.myicon sub{
+            margin: -3px;
         }
         footer{
             color: white;
@@ -83,7 +88,18 @@
             box-shadow: 0px 0px 5px rgb(254, 254, 255);
         }
         body{
-            background: #e9f2ff;
+            background: #f3f7fd;
+        }
+        #qty{
+            background : red;
+            border-radius: 100%;
+            padding: 0 3px;
+            font-size: 12px;
+            vertical-align: revert;
+            padding-bottom: 2px;
+            font-weight: bold;
+            position: relative;
+            right: 10px;
         }
         {% block style %}{% endblock %}
 
@@ -96,7 +112,7 @@
             <div class="container-fluid">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                    <img class="bi me-2 logo" width="40" height="40" role="img" src="{% static 'MyShop/logo2.jpg' %}" >
+                    <img class="bi me-2 logo" width="40" height="40" role="img" src="{% static 'MyShop/SGlogo.png' %}" >
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -128,9 +144,15 @@
                         </a>
                     </div>
                     <div class='mx-4 myicon'>
-                        <a href="cart" class="d-block link-dark text-decoration-none {% block a6 %}{% endblock %}"  aria-expanded="false">
-                            <img src="{% static 'MyShop/icons8-shopping-cart-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle m-1">
-                        </a>
+                       <a tabindex="0" id='popcart' class="d-block link-dark text-decoration-none {% block a6 %}{% endblock %}" aria-expanded="false" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-auto-close="true" title="Your Cart" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+    <img src="{% static 'MyShop/icons8-shopping-cart-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle m-1"><sub id='qty'>10</sub>
+</a>
+
+                      
+
+                        {% comment %} <button type="button" id='popcart'class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+                        Popover on bottom
+                        </button> {% endcomment %}
                     </div>
 
                     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -221,6 +243,46 @@
         </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+    if(localStorage.getItem('cart') == null){
+        var cart = {};
+    }
+    else{
+        cart = JSON.parse(localStorage.getItem('cart'));
+        {% comment %} If cart is not null show the product quantity in cart icon {% endcomment %}
+        document.getElementById('qty').innerHTML = Object.keys(cart).length;
+    }
+
+    $('.cart').click(function(){
+        console.log('button Clicked');
+        var idstr = this.id.toString();
+        console.log(idstr);
+        {% comment %} console.log(cart[idstr]);
+        console.log(cart); {% endcomment %}
+        if(cart[idstr] != undefined ){
+            cart[idstr] = cart[idstr] + 1; 
+            {% comment %} If there already exists items in cart and a new item is added then increment cart item quantity by 1.{% endcomment %}
+        }
+        else{
+            cart[idstr] = 1;
+            {% comment %} here cart[idstr] is undefined as cart is empty This is for first item that has been added to the cart. {% endcomment %}
+        }
+        console.log(cart[idstr]);
+        console.log(cart);
+
+        {% comment %} To update this values in localstorage {% endcomment %}
+        localStorage.setItem('cart',JSON.stringify(cart));
+        
+
+    });
+    $(document).ready(function() {
+    $('#popcart').popover();
+    });
+  
+   
+</script>
+
+    {% block js %}{% endblock %}
   </body>
 </html>
 
