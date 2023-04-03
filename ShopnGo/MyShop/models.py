@@ -12,6 +12,18 @@ class Products(models.Model):
     product_pub_date = models.DateField()
     product_price = models.IntegerField()
     # qty_in_stock = 
-
+ 
     def __str__(self):
         return self.product_name
+    
+
+class Contact(models.Model):
+    contact_id = models.AutoField(primary_key=True)
+    user_name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15,blank=True,null=True)
+    email = models.EmailField(max_length=50,default='')
+    issue = models.CharField(max_length=1500,default='')
+    issue_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.user_name

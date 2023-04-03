@@ -20,6 +20,7 @@
         margin: auto;
         padding: 20px; 
     }
+   
     .card2{
         background:#f3f7fd;
         border:none;
@@ -45,6 +46,59 @@
 {% comment %} .carousel-control-next, .carousel-control-prev{
     width: 3%;
 } {% endcomment %}
+.vd,.cart{
+    padding: 6px 7px;
+}
+.prod-img{
+    margin: auto;
+    padding: 10px 0; 
+    {% comment %} height: 250px; {% endcomment %}
+    width: auto;
+}
+.see_more img{
+    width: 50%;
+    height:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.see_more a{
+    {% comment %} margin: auto; {% endcomment %}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1000.98px) {
+    .prod-img img{
+    height: 240px;
+    width: auto;
+}
+}
+@media (max-width: 600.98px) {
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+  .vd,.cart{
+    padding:2px 6px;
+}
+  .card-body{
+    padding:3px;
+  }
+  .card-title,.cart,.vd{
+    font-size: 12px;
+  }
+    .sdesc{
+        display: none;
+    }
+    .see_more img{
+    width: 50%;
+    height:auto;
+}
+}
+
 
 {% endblock %}
 {% block body %}
@@ -67,18 +121,38 @@
                                     <img src='media/{{p.product_img}}' class="card-img-top img-fluid" alt="...">
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title">{{p.product_name}}</h5>
-                                <p class="card-text">{{p.product_sdesc}}</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                <button type="button" class="btn btn-primary">View Details</button>
-                                <button type="button" id='pr{{p.product_id}}' class="btn btn-primary cart">Add to Cart</button>
+                                <h5 class="card-title text-sm">{{p.product_name|slice:"0:40"}}...</h5>
+                                <p class="card-text text-sm sdesc">{{p.product_sdesc|slice:"0:50"}}...</p>
+                                {% comment %} <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> {% endcomment %}
+                                {% comment %} <div class='row'>
+                                    <a href='productview/{{p.product_id}}'><button type="button" id='pv{{p.product_id}}' class="col-sm-12 col-md-3 col-lg-5 pt-sm-2 btn btn-primary vd">View Details</button></a>
+                                    <button type="button" id='pr{{p.product_id}}' class="btn btn-primary cart col-sm-12 col-md-3 col-lg-5 pt-sm-2">Add to Cart</button>
+                                </div> {% endcomment %}
                                 
+                                <div class='row'>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <a href='productview/{{p.product_id}}'>
+                                    <button type="button" id='pv{{p.product_id}}' class="btn btn-primary vd btn-block mb-2">View Details</button>
+                                    </a>
+                                </div>
+                                {% comment %}divpr{{p.product_id}} - This is so that we can add plus and minus button using updateCart function in main.html {% endcomment %}
+                                <div class="col-sm-12 col-md-12 col-lg-6 divpr{{p.product_id}}">
+                                    <button type="button" id='pr{{p.product_id}}' class="btn btn-primary cart btn-block mb-2">Add to Cart</button>
+                                </div>
+                                </div>
+
                                 </div>
                             </div>
                             {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
                                 </div></div><div class="carousel-item" data-bs-interval="10000"><div class="card-group d-flex flex-wrap">
                             {% endif %}
                             {% if forloop.last %}
+                            <div class='card see_more col-3 col-sm-3'>
+                                <a href="categories/{{c}}" class="">
+                                    <img src="{% static 'MyShop/icons8-macos-maximize-90.png' %}" class='img-fluid'>
+                                    <p>View all {{c}}</p>
+                                </a>
+                            </div>
                                 {% for x in range2 %}
                                     <div class='card card2'></div>
                                 {% endfor %}
@@ -102,6 +176,10 @@
 {% endblock %}
 
 {% block js %}
-
-
+   {% comment %} function updateCart(cart){
+        for(var item in cart){
+            //item will be pr11 or something the id of product
+            document.getElementById('div'+item).innerHTML = "<button id='minus" + item + " 'class='btn btn-primary minus'>-</button><span id='val" + item + "'> " + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
+    } {% endcomment %}
 {% endblock %}

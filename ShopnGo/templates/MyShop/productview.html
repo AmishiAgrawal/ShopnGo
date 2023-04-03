@@ -1,5 +1,37 @@
 {% extends 'MyShop/main.html' %} 
 
+{% block style %}
+
+
+{% endblock %}
 {% block body %}
-<h2>This is productview</h2>
+
+{% load static %}
+
+
+  <div class='container my-5'>
+    <div class='row'>
+        <h2 class='mb-3'>{{product.product_name}}</h2>
+        <h6 class='mb-3'>{{product.product_sdesc}}</h6>
+       
+    </div>
+    <div class="row my-3 img-row">
+      <div class="col-md-4 col-sm-4 my-image">
+        <img src='/media/{{product.product_img}}' class='img-fluid'>
+      </div>
+      <div class="col-md-8 col-sm-8 px-5">
+        <h2 class='mb-3'>Price: Rs.{{product.product_price}}</h2>
+        {% for pl in ldesc %}
+            <li class='my-1'>{{pl}}</li>
+        {% endfor %}
+        <div class="d-grid gap-3 d-md-flex justify-content-md-start mt-4">
+          <button type="button" id='pr{{product.product_id}}' class="btn btn-outline-dark btn-lg px-4 me-md-2 cart">Add to Cart</button>
+          <button type="button" class="btn btn-outline-dark btn-lg px-4">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 {% endblock %}

@@ -1,5 +1,53 @@
 {% extends 'MyShop/main.html' %} 
 {% block a4 %}active{% endblock %}
+{% block style %}
+
+.container{
+    {% comment %} border: 2px solid aliceblue; {% endcomment %}
+    {% comment %} box-shadow: 0px 0px 35px #0042bb94; {% endcomment %}
+    background: linear-gradient(#007eff2e, #1818182e);
+}
+.mylogo{
+    box-shadow: 0px 0px 31px white;
+    border-radius: 100%;
+}
+.mylogo {
+  opacity: 0;
+  animation: fade-in 3s;
+  opacity: 1;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.btn-custom{
+    background: #000050;
+    color: white;
+}
+
+{% endblock %}
 {% block body %}
-<h2>This is About</h2>
+{% load static %}
+
+<div class="container col-xxl-8 px-5 py-4 my-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="{% static 'MyShop/SGlogo.png' %}" class="d-block mx-lg-auto img-fluid mylogo" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">SHOP'N GO</h1>
+        <p class="lead">It is an ecommerce website which is built in Python with the help of Django.This website is made for learning and practising purposes. This website is made by the team of two - Amishi Agrawal and Nikita Chouhan. In this website, we tried to incorporate as many functions as we can that a general ecommerce website have. Thankyou for visiting our site.</p>
+        <p>HAVE A NICE DAY!</p>
+        <div class="gap-4 d-grid d-md-flex justify-content-md-start">
+          <a href='/home' type="button" class="gap-2 btn btn-outline-dark btn-lg px-4">Back to home</a>
+          <a href='/contact' type="button" class="btn btn-outline-dark btn-lg px-4 btn-custom">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block js %}
+
 {% endblock %}
