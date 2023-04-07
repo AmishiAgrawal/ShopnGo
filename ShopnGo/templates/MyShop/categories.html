@@ -37,15 +37,15 @@
             <div class="image-container">
                 <img src="/media/{{product.product_img}}" class="card-img-top img-fluid" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
             </div>
-
+ 
             <div class="card-body">
-              <h4>{{product.product_name|slice:"0:30"}}</h4>
+              <h4 class='namepr{{product.product_id}}'>{{product.product_name|slice:"0:30"}}</h4>
               <p class="card-text">{{product.product_sdesc|slice:"0:30"}}...</p>
               <div class="d-flex justify-content-between align-items-center">
 
                 <div class="btn-group">                 
                   <a href='/productview/{{product.product_id}}'><button type="button" id='pv{{product.product_id}}' class="btn btn-sm btn-outline-secondary">View Details</button></a>
-                  <span class ='divpr{{product.product_id}}'><button type="button" id='pr{{product.product_id}}' class="btn btn-sm cart btn-outline-secondary">Add to Cart</button>
+                  <span class ='divpr{{product.product_id}} cart-btn'><button type="button" id='pr{{product.product_id}}' class="btn btn-sm cart btn-outline-secondary">Add to Cart</button>
                   </span>
                 </div>
                 <small class="text-muted">9 mins</small>

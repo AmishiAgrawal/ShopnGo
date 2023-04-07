@@ -142,7 +142,7 @@
                         </a>
                     </div>
                     <div class='mx-4 myicon'>
-                       <a tabindex="0" id='popcart' class="d-block link-dark text-decoration-none {% block a6 %}{% endblock %}" aria-expanded="false" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-auto-close="true" title="Your Cart" data-bs-content="And here's some amazing content. It's very engaging. Right?" data-bs-html="true">
+                       <a tabindex="0" id='popcart' class="d-block link-dark text-decoration-none {% block a6 %}{% endblock %}" aria-expanded="false" data-bs-toggle="popover" data-bs-auto-close="true" title="Your Cart" data-bs-content="Your Cart is Empty.Add items to cart to see them here." data-bs-html="true">
                         <img src="{% static 'MyShop/icons8-shopping-cart-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle m-1"><sub id='qty'>0</sub>
                     </a>
 
@@ -241,68 +241,7 @@
         </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-
-    //Checking if the cart exists if no then make cart = {} else(it does already exists then ) get that cart object
-    if(localStorage.getItem('cart') == null){
-        var cart = {};
-    }
-    else{
-        cart = JSON.parse(localStorage.getItem('cart'));
-        {% comment %} If cart is not null show the product quantity in cart icon {% endcomment %}
-        document.getElementById('qty').innerHTML = Object.keys(cart).length;
-    }
-    updateCart(cart);
-    //when add to cart is clicked increment the cart items if exists already else set cart items to 1.
-    $('.cart').click(function(){
-        console.log('button Clicked');
-        var idstr = this.id.toString();
-        console.log(idstr);
-        if(cart[idstr] != undefined ){
-            cart[idstr] = cart[idstr] + 1; 
-            //If there already exists items in cart and a new item is added then increment cart item quantity by 1.
-        }
-        else{
-            cart[idstr] = 1;
-            //here cart[idstr] is undefined as cart is empty This is for first item that has been added to the cart.
-        }
-        console.log("-------------------");
-        console.log(cart[idstr]);
-        console.log(typeof(cart[idstr]));
-
-        console.log(cart);
-
-        {% comment %} To update this values in localstorage {% endcomment %}
-        localStorage.setItem('cart',JSON.stringify(cart));
-        
-        {% comment %} Update cart value on the page {% endcomment %}
-        {% comment %} document.getElementById('qty').innerHTML = cart[idstr]; {% endcomment %}
-
-        //Update that changed value
-        document.getElementById('qty').innerHTML = Object.keys(cart).length;
-        updateCart(cart);
-    });
-
-    $(document).ready(function() {
-    $('#popcart').popover();
-    });
-
-    document.getElementById('popcart').setAttribute('data-bs-content','<h2>items</h2>');
-    function updateCart(cart){
-        for(var item in cart){
-            console.log('updatecart function');
-            console.log(document.getElementsByClassName('div'+item).length);
-            //item will be pr11 or something the id of product
-            var mytags = document.getElementsByClassName('div'+item);
-            for(var i in mytags){
-                document.getElementsByClassName('div'+item)[i].innerHTML = "<button id='minus" + item + "'class='btn btn-primary minus'>-</button><span class='cart' id='" + item + "'> " + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
-            }
-        }
-    }
-
-   
     {% block js %}{% endblock %}
-</script>
 
   </body>
 </html>
