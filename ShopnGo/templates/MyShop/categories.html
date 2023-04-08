@@ -61,105 +61,7 @@
   </div>
 {% endblock %}
 {% block js %}
-   <script>
-
-    //Checking if the cart exists if no then make cart = {} else(it does already exists then ) get that cart object
-    $(document).ready(function() {
-    $('#popcart').popover();
-    });
-
-    if(localStorage.getItem('cart') == null){
-        var cart = {};
-    }
-    else{
-        cart = JSON.parse(localStorage.getItem('cart'));
-        updateCart(cart);
-    }
-    //to update popover cart
-    {% comment %} updateCartPopover(cart); {% endcomment %}
-    //when add to cart is clicked increment the cart items if exists already else set cart items to 1.
-    $(document).on('click', '.cart', function(){
-        console.log('button Clicked');
-        var idstr = this.id.toString();//this will store id of the element as a string
-        console.log(idstr);
-        if(cart[idstr] != undefined ){
-            qty = cart[idstr][0] + 1;
-            //If there already exists items in cart and a new item is added then increment cart item quantity by 1.
-        }
-        else{
-            qty = 1;
-            console.log('------------');
-            console.log(idstr);
-            name = document.getElementsByClassName('name' + idstr)[0].innerHTML;
-            image = document.getElementsByClassName('img' + idstr)[0].getElementsByTagName('img')[0].getAttribute('src').slice(1,);
-            cart[idstr] = [qty,name,image];
-            //here cart[idstr] is undefined as cart is empty This is for first item that has been added to the cart.
-        }
-        console.log("-------------------");
-        console.log(cart[idstr][0]);
-        console.log(typeof(cart[idstr]));
-
-        console.log(cart);
-        updateCart(cart);
-        updateCartPopover(cart);
-    });
-
-    function updateCart(cart){
-        var sum_of_items = 0;
-        for(var item in cart){
-            
-            sum_of_items = sum_of_items + cart[item][0];
-            var mytags = document.getElementsByClassName('div'+item);
-
-            for(var i in mytags){
-                document.getElementsByClassName('div'+item)[i].innerHTML = "<button id='minus" + item + "'class='btn btn-primary minus'>-</button><span class='cart' id='val" + item + "'> " + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
-            }
-            if(cart[item][0] == 0){
-                console.log('Ay Caramba!');
-                console.log(cart);
-                delete cart[item];
-                document.getElementsByClassName('div'+item)[0].innerHTML = "<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>";
-                
-                console.log(cart);
-            }
-        }
-
-        //to save the changes in cart
-        localStorage.setItem('cart',JSON.stringify(cart));
-        document.getElementById('qty').innerHTML = sum_of_items;
-        updateCartPopover(cart);
-    }
-
-    $('.cart-btn').on('click',"button.minus",function(){
-        console.log('minus button was clicked');
-        console.log(this.id);//minuspr--
-        var p_id = this.id.slice(5,);//this will return from 6th character[0 to 4 are 5 characters] to last i.e pr-
-        cart[p_id][0] = cart[p_id][0] - 1;
-        cart[p_id][0] = Math.max(0,cart[p_id][0]);//so that the product qty in cart doesnot go lower than 0
-        console.log(document.getElementById('val'+p_id).innerHTML);
-        console.log(document.getElementById('val'+p_id));
-        console.log(document.getElementById('val'+p_id).length);
-        console.log('look here');
-        document.getElementById('val'+p_id).innerHTML = cart[p_id][0];
-        
-        console.log(cart);
-        updateCart(cart);
-        updateCartPopover(cart);
-    });
-
-    $('.cart-btn').on('click',"button.plus",function(){
-        console.log('plus button was clicked');
-        console.log(this.id);//pluspr--
-        var p_id = this.id.slice(4,);//this will return from 5th character[0 to 3 are 4 characters] to last i.e pr-
-        cart[p_id][0] = cart[p_id][0] + 1;
-        document.getElementById('val'+ p_id).innerHTML = cart[p_id][0];
-        console.log(cart);
-        updateCart(cart);
-        updateCartPopover(cart);
-    });
    
-
-    
     function updateCartPopover(cart){
         console.log('updateCartPopover is running');
         console.log(cart);
@@ -186,17 +88,4 @@
         }
     } 
 
-    $(document).on('click', '#clearcart', function ClearCart(){
-        console.log('clear cart is running');
-        cart = JSON.parse(localStorage.getItem('cart'));
-        for(var item in cart){
-            document.getElementsByClassName('div' + item).innerHTML = "<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>"
-        }
-        localStorage.clear();
-        cart = {};
-        updateCart(cart);
-
-    });
-    //to update popover cart
-</script>
 {% endblock %}

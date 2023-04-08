@@ -67,8 +67,10 @@
 </div>
 {% endblock %}
 
-{% block js %}
+{% block mainjs %}
+
 <script>
+
     if(localStorage.getItem('cart') == null){
         var cart = {};
     }
@@ -91,7 +93,9 @@
             $('#items').append(mystr);
         console.log(imagepath);
     }
-    
+
 </script>
+
+
 {% endblock %}
 
