@@ -146,8 +146,6 @@
                         <img src="{% static 'MyShop/icons8-shopping-cart-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle m-1"><sub id='qty'>0</sub>
                     </a>
 
-                      
-
                         {% comment %} <button type="button" id='popcart'class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
                         Popover on bottom
                         </button> {% endcomment %}
@@ -246,10 +244,10 @@
     <script>
 
     //Checking if the cart exists if no then make cart = {} else(it does already exists then ) get that cart object
-    $(document).ready(function() {
+    {% comment %} $(document).ready(function() {
     $('#popcart').popover();
-    });
-
+    }); {% endcomment %}
+    
     if(localStorage.getItem('cart') == null){
         var cart = {};
     }
@@ -257,8 +255,11 @@
         cart = JSON.parse(localStorage.getItem('cart'));
         updateCart(cart);
     }
-    //to update popover cart
     updateCartPopover(cart);
+
+    //when no items in cart
+    
+    //to update popover cart
     //when add to cart is clicked increment the cart items if exists already else set cart items to 1.
     $(document).on('click', '.cart', function(){
         console.log('button Clicked');
@@ -278,9 +279,7 @@
             if(image[0] == '/'){
                 image = image.slice(1,);
             }
-            console.log('up');
-            console.log(image);
-            
+
             cart[idstr] = [qty,name,image];
             //here cart[idstr] is undefined as cart is empty This is for first item that has been added to the cart.
         }
@@ -315,7 +314,7 @@
             var mytags = document.getElementsByClassName('div'+item);
 
             for(var i in mytags){
-                document.getElementsByClassName('div'+item)[i].innerHTML = "<button id='minus" + item + "'class='btn btn-primary minus'>-</button><span class='cart' id='val" + item + "'> " + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+                document.getElementsByClassName('div'+item)[i].innerHTML = {% block update_cart2 %} "<button id='minus" + item + "'class='btn btn-primary minus'>-</button><span class='cart' id='val" + item + "'> " + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>"{% endblock %};
             }
             if(cart[item][0] == 0){
                 console.log('Ay Caramba!');
@@ -325,7 +324,9 @@
                 //console.log('reached 0');
                 //console.log(document.getElementsByClassName('div'+item)[0]);
                 //console.log(document.getElementsByClassName('div'+item)[0].innerHTML);
-                document.getElementsByClassName('div'+item)[0].innerHTML = "<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>";
+                
+                document.getElementsByClassName('div'+item)[0].innerHTML = {% block update_cart %}"<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>"{% endblock %};
+                
                 //console.log(document.getElementsByClassName('div'+item)[0].innerHTML);
                 //console.log(document.getElementsByClassName('div'+item)[0]);
                 console.log(cart);
@@ -371,11 +372,15 @@
         console.log('clear cart is running');
         cart = JSON.parse(localStorage.getItem('cart'));
         for(var item in cart){
-            document.getElementsByClassName('div' + item).innerHTML = "<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>"
-        }
+            x = document.getElementsByClassName('div' + item);
+            for(var i in x){
+                x[i].innerHTML = {% block update_cart3 %}"<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>"{% endblock %}
+            }
+            }
         localStorage.clear();
         cart = {};
         updateCart(cart);
+        updateCartPopover(cart);
 
     });
     //to update popover cart

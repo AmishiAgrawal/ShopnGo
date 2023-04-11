@@ -49,5 +49,46 @@
   </div>
 {% endblock %}
 {% block js %}
+   
+    function updateCartPopover(cart){
+        console.log('updateCartPopover is running');
+        console.log(cart);
+        console.log(Object.keys(cart).length);
+
+        if(Object.keys(cart).length > 0){
+            var popStr = "";
+            //popStr = popStr + "<h4>Items in your cart</h4>";
+            var i = 1;
+            console.log(cart);
+            for(var item in cart){
+              let qty = cart[item][0];
+              let name = cart[item][1];
+
+              popStr = popStr +  "<br>" + "<b>" + i + ". </b>" + name + "<b> Qty: </b>" + qty;
+              i = i + 1;
+            } 
+            popStr = popStr + "<div class='my-2 mx-2'><a href='/checkout/' id='checkout' class='btn btn-primary'>Checkout</a><a id='clearcart' class='btn btn-primary mx-2'>Clear Cart</a></div>" 
+            console.log(popStr);
+            document.getElementById('popcart').setAttribute('data-bs-content',popStr);
+            $(document).ready(function() {
+                $('#popcart').popover();
+            });
+        }
+        else{
+          popStr = 'Your Cart is Empty. Add items to your cart to see them here.';
+        }
+        var popover = bootstrap.Popover.getInstance(document.querySelector('#popcart'));
+        if (popover) {
+            popover.dispose();
+        }
+        popover = new bootstrap.Popover(document.querySelector('#popcart'), {
+            title: 'Your Cart',
+            content: popStr,
+            html: true
+        });
+        popover.show();
+        setInterval(function() {popover.hide()}, 3000);
+
+    } 
 
 {% endblock %}

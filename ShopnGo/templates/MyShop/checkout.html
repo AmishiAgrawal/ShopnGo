@@ -78,24 +78,147 @@
         cart = JSON.parse(localStorage.getItem('cart'));
     }
     console.log(cart);
+    set_products(cart);
+    
+    function set_products(cart){
+        console.log('my cart');
+        console.log(cart);
+        console.log(Object.keys(cart).length);
 
-    for(var item in cart){
-        let qty = cart[item][0];
-        let name = cart[item][1]
-        let imagepath = cart[item][2]
-        console.log(imagepath);
+        if(Object.keys(cart).length <= 0){
+            console.log('if ');
 
-        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center row">
+            document.getElementById('items').innerHTML = `<li class="list-group-item d-flex justify-content-between align-items-center row">
+                <div class='col-12 text-center mt-2'><p>No items in your Cart. Add Products to your Cart to see them here.</p></div>
+            </li>`
+;
+            {% comment %} $('#items').append(mystr); {% endcomment %}
+        }
+        else{
+            for(var item in cart){
+                let qty = cart[item][0];
+                let name = cart[item][1]
+                let imagepath = cart[item][2]
+                console.log(imagepath);
+                
+                mystr = `<li class="list-group-item d-flex justify-content-between align-items-center row">
                     <div class='col-xs-4 col-sm-3 col-4'><img class='img-fluid myimg' src="/${imagepath}"></div>
                     <div class='col-6'><p>${name}</p></div>
                     <div class='col-1'><span class="badge bg-primary rounded-pill">${qty}</span></div>
                 </li>`
-            $('#items').append(mystr);
-        console.log(imagepath);
+                $('#items').append(mystr);
+                console.log(imagepath);
+            }
+        }
     }
 
+
+    updateCartPopover(cart);
+    {% block js %}
+
+    $(document).on('click', '#clearcart', function ClearCart(){
+        console.log('clear cart is running');
+        cart = JSON.parse(localStorage.getItem('cart'));
+        for(var item in cart){
+            x = document.getElementsByClassName('div' + item);
+            for(var i in x){
+                x[i].innerHTML = {% block update_cart3 %}"<button type='button' id='" + item + "' class='btn btn-primary cart btn-block mb-2'>Add to Cart</button>"{% endblock %}
+            }
+        }
+        localStorage.clear();
+        cart = {};
+        
+        updateCartPopover(cart);
+        set_products(cart);
+        
+
+    });
+
+    function updateCartPopover(cart){
+        console.log('updateCartPopover is running');
+        console.log(cart);
+        console.log(Object.keys(cart).length);
+        var popStr = "";
+        if(Object.keys(cart).length > 0)
+        {
+            //popStr = popStr + "<h4>Items in your cart</h4>";
+            var i = 1;
+            var total_items = 0;
+            console.log(cart);
+            for(var item in cart){
+                let qty = cart[item][0];
+                let name = cart[item][1];
+                total_items = total_items + qty;
+                popStr = popStr +  "<br>" + "<b>" + i + ". </b>" + name + "<b> Qty: </b>" + qty;
+                i = i + 1;
+            } 
+        
+            popStr = popStr + "<div class='my-2 mx-2'><a href='/checkout/' id='checkout' class='btn btn-primary'>Checkout</a><a id='clearcart' class='btn btn-primary mx-2'>Clear Cart</a></div>" 
+            console.log(popStr);
+            {% comment %} document.getElementById('popcart').setAttribute('data-bs-content',popStr); {% endcomment %}
+            {% comment %} $(document).ready(function() {
+                $('#popcart').popover();
+            }); {% endcomment %}
+            document.getElementById('qty').innerHTML = total_items;
+        }
+        else
+        {
+            {% comment %} If cart is empty this code will get executed {% endcomment %}
+            popStr = 'Your Cart is Empty. Add items to your cart to see them here.';
+            document.getElementById('qty').innerHTML = 0;
+            set_products(cart);
+        }
+            //getting the existing popover in popover variable and destroying or disposing it
+        var popover = bootstrap.Popover.getInstance(document.querySelector('#popcart'));
+        if (popover) {
+            popover.dispose();
+        }
+        {% comment %} creating a new popover with content equal to popStr {% endcomment %}
+        popover = new bootstrap.Popover(document.querySelector('#popcart'), {
+            title: 'Your Cart',
+            content: popStr,
+            html: true
+        });
+        
+        popover.show();     
+        setInterval(function() {popover.hide()}, 3000); 
+    }
+
+
+    {% comment %} function updateCartPopover(cart){
+        console.log('updateCartPopover is running');
+        console.log(cart);
+        console.log(Object.keys(cart).length);
+
+        if(Object.keys(cart).length > 0){
+            var popStr = "";
+            //popStr = popStr + "<h4>Items in your cart</h4>";
+            var i = 1;
+            var total_items = 0;
+            console.log(cart);
+            for(var item in cart){
+              let qty = cart[item][0];
+              let name = cart[item][1];
+              total_items = total_items + qty;
+              popStr = popStr +  "<br>" + "<b>" + i + ". </b>" + name + "<b> Qty: </b>" + qty;
+              i = i + 1;
+            } 
+            popStr = popStr + "<div class='my-2 mx-2'><a href='/checkout/' id='checkout' class='btn btn-primary'>Checkout</a><a id='clearcart' class='btn btn-primary mx-2'>Clear Cart</a></div>" 
+            console.log(popStr);
+            document.getElementById('popcart').setAttribute('data-bs-content',popStr);
+            $(document).ready(function() {
+                $('#popcart').popover();
+            });
+
+            //Update that cart value
+            document.getElementById('qty').innerHTML = total_items;
+        }
+    }  {% endcomment %}
+
+{% endblock %}
 </script>
 
 
 {% endblock %}
+
 

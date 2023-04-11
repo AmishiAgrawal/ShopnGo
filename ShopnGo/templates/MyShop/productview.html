@@ -1,7 +1,10 @@
 {% extends 'MyShop/main.html' %} 
 
 {% block style %}
-
+{% comment %} quantity of product in view product page {% endcomment %}
+.qty_vp{
+  line-height: 230%;
+}
 
 {% endblock %}
 {% block body %}
@@ -11,12 +14,12 @@
 
   <div class='container my-5'>
     <div class='row'>
-        <h2 class='mb-3'>{{product.product_name}}</h2>
+        <h2 class='mb-3 namepr{{product.product_id}}'>{{product.product_name}}</h2>
         <h6 class='mb-3'>{{product.product_sdesc}}</h6>
        
     </div>
     <div class="row my-3 img-row">
-      <div class="col-md-4 col-sm-4 my-image">
+      <div class="col-md-4 col-sm-4 my-image imgpr{{product.product_id}}">
         <img src='/media/{{product.product_img}}' class='img-fluid'>
       </div>
       <div class="col-md-8 col-sm-8 px-5">
@@ -24,8 +27,10 @@
         {% for pl in ldesc %}
             <li class='my-1'>{{pl}}</li>
         {% endfor %}
-        <div class="d-grid gap-3 d-md-flex justify-content-md-start mt-4">
-          <button type="button" id='pr{{product.product_id}}' class="btn btn-outline-dark btn-lg px-4 me-md-2 cart">Add to Cart</button>
+
+
+        <div class="gap-3 justify-content-md-start mt-4 divpr{{product.product_id}} cart-btn">
+          <button type="button" id='pr{{product.product_id}}' class="mx-3 btn btn-outline-dark btn-lg px-4 cart">Add to Cart</button>
           <button type="button" class="btn btn-outline-dark btn-lg px-4">Buy Now</button>
         </div>
       </div>
@@ -35,3 +40,51 @@
 
 
 {% endblock %}
+{% block js %}
+   
+    function updateCartPopover(cart){
+        console.log('updateCartPopover is running');
+        console.log(cart);
+        console.log(Object.keys(cart).length);
+
+        if(Object.keys(cart).length > 0){
+            var popStr = "";
+            //popStr = popStr + "<h4>Items in your cart</h4>";
+            var i = 1;
+            console.log(cart);
+            for(var item in cart){
+              let qty = cart[item][0];
+              let name = cart[item][1];
+
+              popStr = popStr +  "<br>" + "<b>" + i + ". </b>" + name + "<b> Qty: </b>" + qty;
+              i = i + 1;
+            } 
+            popStr = popStr + "<div class='my-2 mx-2'><a href='/checkout/' id='checkout' class='btn btn-primary'>Checkout</a><a id='clearcart' class='btn btn-primary mx-2'>Clear Cart</a></div>" 
+            console.log(popStr);
+            {% comment %} document.getElementById('popcart').setAttribute('data-bs-content',popStr);
+            $(document).ready(function() {
+                $('#popcart').popover();
+            }); {% endcomment %}
+        }
+        else{
+          popStr = 'Your Cart is Empty. Add items to your cart to see them here.';
+        }
+        var popover = bootstrap.Popover.getInstance(document.querySelector('#popcart'));
+        if (popover) {
+            popover.dispose();
+        }
+        popover = new bootstrap.Popover(document.querySelector('#popcart'), {
+            title: 'Your Cart',
+            content: popStr,
+            html: true
+        });
+        popover.show();
+        setInterval(function() {popover.hide()}, 3000);
+
+    } 
+
+{% endblock %}
+{% block update_cart %}"<button type='button' id='" + item + "' class='mx-3 btn btn-outline-dark btn-lg px-4 cart'>Add to Cart</button><button type='button' class='btn btn-outline-dark btn-lg px-4'>Buy Now</button>"{% endblock %}
+
+
+{% block update_cart2 %} "<button id='minus" + item + "' class='btn btn-dark minus'>-</button><span class='cart qty_vp px-3' id='val" + item + "'> " + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-dark plus'>+</button><button type='button' class='mx-3 btn btn-outline-dark  px-4'>Buy Now</button>"{% endblock %}

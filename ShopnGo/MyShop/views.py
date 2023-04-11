@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from math import ceil
 from . models import *
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -60,6 +61,7 @@ def categories(request,my_category):
     product = Products.objects.filter(product_category=my_category)
     return render(request,'MyShop/categories.html',{'products':product}) 
 
+# @login_required 
 def checkout(request):
     return render(request,'MyShop/checkout.html')
 
