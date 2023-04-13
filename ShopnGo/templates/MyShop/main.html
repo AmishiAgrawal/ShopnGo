@@ -142,7 +142,7 @@
                         </a>
                     </div>
                     <div class='mx-4 myicon'>
-                       <a tabindex="0" id='popcart' class="d-block link-dark text-decoration-none {% block a6 %}{% endblock %}" aria-expanded="false" data-bs-toggle="popover" data-bs-auto-close="true" title="Your Cart" data-bs-content="Your Cart is Empty.Add items to cart to see them here." data-bs-html="true">
+                       <a href="/cart/" class="d-block link-dark text-decoration-none {% block a6 %}{% endblock %}"  aria-expanded="false">
                         <img src="{% static 'MyShop/icons8-shopping-cart-24.png' %}" alt="mdo" width="24" height="24" class="rounded-circle m-1"><sub id='qty'>0</sub>
                     </a>
 
@@ -242,20 +242,15 @@
    
     {% block mainjs %}
     <script>
-
-    //Checking if the cart exists if no then make cart = {} else(it does already exists then ) get that cart object
-    {% comment %} $(document).ready(function() {
-    $('#popcart').popover();
-    }); {% endcomment %}
+    {% block js1 %}
     
-    if(localStorage.getItem('cart') == null){
+    if(localStorage.getItem('cart') == null || localStorage.getItem('cart') == undefined){
         var cart = {};
     }
     else{
         cart = JSON.parse(localStorage.getItem('cart'));
         updateCart(cart);
     }
-    updateCartPopover(cart);
 
     //when no items in cart
     
@@ -275,12 +270,13 @@
             console.log(idstr);
             name = document.getElementsByClassName('name' + idstr)[0].innerHTML;
             image = document.getElementsByClassName('img' + idstr)[0].getElementsByTagName('img')[0].getAttribute('src');
+            price = document.getElementsByClassName('price' + idstr)[0].textContent;
             console.log(image);
             if(image[0] == '/'){
                 image = image.slice(1,);
             }
 
-            cart[idstr] = [qty,name,image];
+            cart[idstr] = [qty,name,image,price];
             //here cart[idstr] is undefined as cart is empty This is for first item that has been added to the cart.
         }
         console.log("-------------------");
@@ -289,18 +285,10 @@
 
         console.log(cart);
 
-        //To update this values in localstorage
-        //localStorage.setItem('cart',JSON.stringify(cart));
-        
-        // Update cart value on the page
-        // document.getElementById('qty').innerHTML = cart[idstr];
-
-        //Update that changed value
-        //document.getElementById('qty').innerHTML = Object.keys(cart).length;
         updateCart(cart);
-        updateCartPopover(cart);
     });
-
+    {% endblock %}
+    {% block js2 %}
    
     //document.getElementById('popcart').setAttribute('data-bs-content','<h2>items</h2>');
     function updateCart(cart){
@@ -316,6 +304,7 @@
             for(var i in mytags){
                 document.getElementsByClassName('div'+item)[i].innerHTML = {% block update_cart2 %} "<button id='minus" + item + "'class='btn btn-primary minus'>-</button><span class='cart' id='val" + item + "'> " + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>"{% endblock %};
             }
+            console.log('total: ' + sum_of_items);
             if(cart[item][0] == 0){
                 console.log('Ay Caramba!');
                 console.log(cart);
@@ -336,9 +325,28 @@
         //to save the changes in cart
         localStorage.setItem('cart',JSON.stringify(cart));
         document.getElementById('qty').innerHTML = sum_of_items;
-        updateCartPopover(cart);
+        {% comment %} updateCartPopover(cart); {% endcomment %}
+
+        if(Object.keys(cart).length > 0)
+        {
+            var total_items = 0;
+            for(var item in cart){
+                let qty = cart[item][0];
+                total_items = total_items + qty;
+            } 
+            document.getElementById('qty').innerHTML = total_items;
+        }
+        else
+        {
+            {% comment %} If cart is empty this code will get executed {% endcomment %}
+            document.getElementById('qty').innerHTML = 0;
+            {% comment %} set_products(cart); {% endcomment %}
+        }
     }
 
+    {% endblock %}
+
+    {% block js3 %}
     $('.cart-btn').on('click',"button.minus",function(){
         console.log('minus button was clicked');
         console.log(this.id);//minuspr--
@@ -353,7 +361,6 @@
         
         console.log(cart);
         updateCart(cart);
-        updateCartPopover(cart);
     });
 
     $('.cart-btn').on('click',"button.plus",function(){
@@ -364,7 +371,6 @@
         document.getElementById('val'+ p_id).innerHTML = cart[p_id][0];
         console.log(cart);
         updateCart(cart);
-        updateCartPopover(cart);
     });
    
 
@@ -380,11 +386,11 @@
         localStorage.clear();
         cart = {};
         updateCart(cart);
-        updateCartPopover(cart);
+
 
     });
-    //to update popover cart
-    {% block js %}{% endblock %}
+
+    {% endblock %}
 </script>
 {% endblock %}
   </body>
